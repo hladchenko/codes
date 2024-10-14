@@ -1,7 +1,9 @@
 package src.com.hladchenko;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,15 +11,14 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        var codes = readLines("src/com/hladchenko/codes");
-        var lines = readLines("src/com/hladchenko/file.txt");
+        var codes = readLines("codes.txt");
+        var lines = readLines("file.txt");
 
         List<String> newList = new ArrayList<>(codes);
 
         int count = 0;
 
         for (String line : lines) {
-            boolean found = false;
             for (String code : codes) {
                 if (line.equals(code)) {
                     count++;
@@ -26,9 +27,7 @@ public class Main {
             }
         }
 
-        System.out.println(newList);
-
-        System.out.println("Total: " + count);
+        crateNewFile(newList);
     }
 
     public static List<String> readLines(String filename) {
@@ -47,5 +46,17 @@ public class Main {
             e.printStackTrace();
         }
         return lines;
+    }
+
+    public static void crateNewFile(List<String> lines) {
+        try(BufferedWriter br = new BufferedWriter(new FileWriter("result.txt"))) {
+            for (String line : lines) {
+                br.write(line);
+                br.newLine();
+            }
+            br.flush();
+        }  catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
