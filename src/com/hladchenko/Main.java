@@ -16,17 +16,13 @@ public class Main {
 
         List<String> newList = new ArrayList<>(codes);
 
-        int count = 0;
-
         for (String line : lines) {
             for (String code : codes) {
                 if (line.equals(code)) {
-                    count++;
                     newList.remove(code);
                 }
             }
         }
-
         crateNewFile(newList);
     }
 
@@ -38,24 +34,23 @@ public class Main {
             String line = reader.readLine();
             while (line != null) {
                 lines.add(line.trim());
-                // read next line
                 line = reader.readLine();
             }
             reader.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return lines;
     }
 
     public static void crateNewFile(List<String> lines) {
-        try(BufferedWriter br = new BufferedWriter(new FileWriter("result.txt"))) {
+        try (BufferedWriter br = new BufferedWriter(new FileWriter("result.txt"))) {
             for (String line : lines) {
                 br.write(line);
                 br.newLine();
             }
             br.flush();
-        }  catch (IOException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
