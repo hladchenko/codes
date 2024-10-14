@@ -1,4 +1,4 @@
-package src.com.hladchenko;
+package com.hladchenko;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,7 +14,7 @@ public class Main {
         var codes = readLines("codes.txt");
         var lines = readLines("file.txt");
 
-        List<String> newList = new ArrayList<>(codes);
+        var newList = new ArrayList<>(codes);
 
         for (String line : lines) {
             for (String code : codes) {
